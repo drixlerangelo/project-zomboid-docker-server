@@ -1,0 +1,27 @@
+version: "3.7"
+
+services:
+    project-zomboid-server:
+        container_name: pzserver
+        image: afey/zomboid
+        environment:
+            SERVER_NAME: "pzserver"
+            ADMIN_PASSWORD: "pzserver-password"
+            RCON_PASSWORD: ${RCON_PASSWORD}
+            SERVER_NAME: ${SERVER_NAME}
+            SERVER_PASSWORD: ${SERVER_PASSWORD}
+            SERVER_PUBLIC_NAME: ${SERVER_PUBLIC_NAME}
+            SERVER_PUBLIC_DESC: ${SERVER_PUBLIC_DESC}
+            SERVER_BRANCH: ${SERVER_BRANCH}
+            SERVER_BETA_PASSWORD: ${SERVER_BETA_PASSWORD}
+            ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+        ports:
+            - ${STEAM_PORT_1}:8766/udp
+            - ${STEAM_PORT_2}:8767/udp
+            - ${SERVER_PORT}:16261/udp
+            - 16262-${PLAYER_PORT_END}:16262-${PLAYER_PORT_END}
+            - ${RCON_PORT}:27015
+        volumes:
+            - ./server-data:/server-data
+            - ./server-files:/server-files
+        restart: unless-stopped

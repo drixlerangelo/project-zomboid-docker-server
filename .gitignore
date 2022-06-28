@@ -1,0 +1,5 @@
+﻿server-files/*
+server-data/*
+!server-files/.gitkeep
+!server-data/.gitkeep
+.env
